@@ -1,0 +1,10 @@
+ANSWERS
+1.Live polling apps like Kahoot, Mentimeter, Google Forms, and StrawPoll offer real-time quizzes, polls, and audience interaction but face risks like bot attacks, vote manipulation, phishing, and privacy breaches. Security matters because it protects the integrity of results, keeps user data private, and maintains trust in the platform. Without strong safeguards, polls can be easily manipulated or misused, leading to unfair outcomes and loss of credibility.
+2. SSL/TLS encrypts data between a browser and a server so no one can spy on or change it. HTTPS is just HTTP with this encryption, making it safer than plain HTTP. Web apps need SSL to protect passwords, personal info, and keep data trustworthy. Without it, hackers can steal or alter data and impersonate websites. A real example is Equifax’s 2017 breach, where expired SSL certificates weakened their security and let attackers go unnoticed.
+3.JWT (JSON Web Token) is a compact, signed format for securely passing user claims between a client and server. It’s useful because it allows stateless authentication and authorization without keeping sessions on the server. When a user logs in, the server issues a token the client sends with each request, and the server verifies its signature to grant access. Without SSL/TLS, JWTs can be intercepted and reused by attackers. A real-world example is the “alg:none” flaw discovered in some JWT libraries, which let attackers bypass signature checks and gain unauthorized access.
+4.
+5.
+6.
+7.
+8.
+9.
