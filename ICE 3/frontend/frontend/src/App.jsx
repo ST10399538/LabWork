@@ -11,7 +11,6 @@ function App() {
       <div>
         <h2> Welcome to PulseVote</h2>
       </div>
-      
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
