@@ -2,11 +2,15 @@ const express = require("express");
 const { register, login } = require("../controllers/authController");
 const router = express.Router();
 
+
 router.post("/register", register);
 router.post("/login", login);
 
 module.exports = router;
 
+   const { registerUser, registerManager, registerAdmin, login } = require("../controllers/authController");
+
+    const { requireRole } = require("../middleware/roleMiddleware");
 const jwt = require("jsonwebtoken");
 
 const protect = (req, res, next) => {
@@ -28,6 +32,14 @@ const express = require("express");
 const { body } = require("express-validator");
 const { register, login } = require("../controllers/authController");
 
+const { registerLimiter, loginLimiter} = require("../middleware/rateLimiter")
+
+router.post("/register-user", registerLimiter, [emailValidator, passwordValidator], registerUser);
+router.post("/register-manager", protect, requireRole("admin"), registerLimiter, [emailValidator, passwordValidator], registerManager);
+router.post("/register-admin", registerLimiter, [emailValidator, passwordValidator], registerAdmin);
+
+router.post("/login", loginLimiter, [emailValidator, body("password").notEmpty().trim().escape()], login);
+
 
 const emailValidator = body("email")
   .isEmail().withMessage("Email must be valid")
@@ -39,7 +51,10 @@ const passwordValidator = body("password")
   .matches(/\d/).withMessage("Password must include a number")
   .trim().escape();
 
-router.post("/register", [emailValidator, passwordValidator], register);
+ router.post("/register-user", [emailValidator, passwordValidator], registerUser);
+    router.post("/register-manager", protect, requireRole("admin"), [emailValidator, passwordValidator], registerManager);
+    router.post("/register-admin", [emailValidator, passwordValidator], registerAdmin);
+    router.post("/login", [emailValidator, body("password").notEmpty().trim().escape()], login);
 router.post("/login", [emailValidator, body("password").notEmpty().trim().escape()], login);
 
 module.exports = router;
